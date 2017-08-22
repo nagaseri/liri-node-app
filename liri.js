@@ -1,6 +1,3 @@
-//log.txt
-//spotify this ace of base
-
 var userCommand = process.argv[2];
 var nodeArgs = process.argv;
 
@@ -29,9 +26,7 @@ function doWhatItSays(){
 	    	return console.log('Error occurred: ' + err);
 		}
 		else {
-		  	// console.log(data);
 		  	var songs = data.tracks.items;
-		  	// console.log(songs);
 		  	songs.forEach(function(song) {
 		  		console.log(song.preview_url);
 		  		console.log(song.album.artists[0].name);
@@ -47,7 +42,7 @@ function doWhatItSays(){
 function spotifyThis(){
 	var songName = '';
 		if (process.argv[3] === undefined){
-			songName = 'The Sign';
+			songName = 'The Sign Ace of Base';
 		} 
 		else {
 			songName = process.argv.slice(3).join(" ");
@@ -60,7 +55,6 @@ function spotifyThis(){
 	  else {
 	  	// console.log(data);
 	  	var songs = data.tracks.items;
-	  	// console.log(songs);
 	  	songs.forEach(function(song) {
 	  		console.log(song.preview_url);
 	  		console.log(song.album.artists[0].name);
@@ -81,8 +75,9 @@ function myTweets(){
 	client.get('statuses/user_timeline', params, function(error, tweets, response){
 		if (!error && response.statusCode === 200){
 			for(var i = 0; i < tweets.length; i++){
-			console.log(tweets[i].text);
-			console.log(' ');
+			var tweetResults = '\nTweet: ' + tweets[i].text;
+			console.log(tweetResults);
+			// addToTextFile(tweetResults);
 			}
 		}
 	});
@@ -102,29 +97,21 @@ function movieThis(){
 
 	request(queryURL, function(error, response, body){
 		if (!error && response.statusCode === 200 && userCommand !== " "){
-			
-			console.log("Title: " + JSON.parse(body).Title);
-			console.log("Year: " + JSON.parse(body).Year);
-			console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-			console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[0].Value);
-			console.log("Country: " + JSON.parse(body).Country);
-			console.log("Language: " + JSON.parse(body).Language);
-			console.log("Plot: " + JSON.parse(body).Plot);
-			console.log("Actors: " + JSON.parse(body).Actors);
+			 
+			var movieResults = "\nTitle: " + JSON.parse(body).Title + "\nYear: " + JSON.parse(body).Year + "\nIMDB Rating: " + JSON.parse(body).imdbRating + "\nRotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\nCountry: " + JSON.parse(body).Country + "\nLanguage: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors: " + JSON.parse(body).Actors;
+			console.log(movieResults);
+			// addToTextFile(movieResults);
 		}
 	});
 }
 
-function addToTextFile(){
-	fs.appendFile('log.txt', ', ' +  function(err) {
-	if (err) {
-	    console.log(err);
-	  	}
-	  	else {
-
-	  	}
-	});
-}
+// function addToTextFile(movieResults, tweetResults){
+// 	fs.appendFile('log.txt', '\n', movieResults, '\n', tweetResults, function(err) {
+// 		if (err) {
+// 		    console.log(err);
+// 		}
+// 	});
+// }
 
 
 switch (userCommand){
