@@ -1,6 +1,6 @@
 # LIRI Node App
 
-	A node app that will take in your commands and render information!  
+	A SIRI like app using node to search movies, songs, and tweets based on your command!  
 
 	Below are screenshots of the app: 
 
